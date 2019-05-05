@@ -87,4 +87,28 @@ public class Test1 {
         System.out.println(evalTrain.toSummaryString());
 
     }
+
+    //        for (int i = 5; i < 25; i++) {
+//            for (int j = 5; j < 25; j++) {
+//                FileReader trainreader = new FileReader("mnist_test_reduced.arff");
+//                Instances testingData = new Instances(trainreader);
+//                testingData.setClassIndex(0);
+//                double arr[] = testingData.attributeToDoubleArray(1);
+//                //for(double i : arr) i = 1;
+//
+//                ++count;
+//                testingData.deleteAttributeAt(count);
+//                Attribute att = new Attribute(i + "x" + j, count);
+//                testingData.insertAttributeAt(att, count);
+//
+//
+//
+//                MultilayerPerceptron classifier = (MultilayerPerceptron) SerializationHelper.read("nnReduced");
+//                Evaluation evalTrain = new Evaluation(testingData);
+//                evalTrain.evaluateModel(classifier, testingData);
+//                System.out.println(i + "x" + j + " : \n");
+//                System.out.println(evalTrain.toSummaryString());
+//            }
+//        }
+
 }

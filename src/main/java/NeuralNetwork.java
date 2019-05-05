@@ -16,12 +16,16 @@ public class NeuralNetwork {
 
     public static void main(String[] args) throws Exception{
 
+        //Vytvor a natrenuj novu neuronovu siet
         Classifier mlp = trainNN();
         mlp.buildClassifier(trainingData);
 
-        //SerializationHelper.write(new FileOutputStream("nnReduced"), mlp);
+        //serializacia teda ulozenie modelu:
+        //SerializationHelper.write(new FileOutputStream("NeuralNetwork"), mlp);
+
         testingData = prepareTestInstance();
 
+        //testovanie a vyhodnotenie modelu
         Evaluation evaluation = new Evaluation(trainingData);
         evaluation.evaluateModel(mlp, testingData);
         System.out.println(evaluation.errorRate());
@@ -39,23 +43,12 @@ public class NeuralNetwork {
             trainreader = new FileReader("D:\\FIIT\\4. semester\\UI\\UI4\\mnist_train.arff");
             trainingData = new Instances(trainreader);
             trainingData.setClassIndex(0);
-            trainingData.attribute(408).setWeight(10);
-            trainingData.attribute(436).setWeight(10);
-            trainingData.attribute(464).setWeight(10);
-
             mlp = new MultilayerPerceptron();
+            //Nastavenie parametrov neuronovej siete: -H je pocet skrytych vrstiev
             mlp.setOptions(Utils.splitOptions("-L 0.1 -M 0.2 -N 2 -H 100"));
         }
         catch (Exception e){
             e.printStackTrace();
-        }finally {
-            if (trainreader != null) {
-                try {
-                    trainreader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return mlp;
     }
@@ -64,20 +57,11 @@ public class NeuralNetwork {
 
         FileReader testreader = null;
         try {
-            // Read the training data
             testreader = new FileReader("D:\\FIIT\\4. semester\\UI\\UI4\\mnist_test.arff");
             testingData = new Instances(testreader);
                 testingData.setClassIndex(0);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (testreader != null) {
-                try {
-                    testreader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return testingData;
     }

@@ -7,6 +7,7 @@ import weka.classifiers.Classifier;
 import weka.classifiers.Evaluation;
 import weka.classifiers.trees.J48;
 import weka.classifiers.trees.M5P;
+import weka.classifiers.trees.RandomForest;
 import weka.core.DenseInstance;
 import weka.core.Instance;
 import weka.core.Instances;
@@ -14,100 +15,61 @@ import weka.core.SerializationHelper;
 
 public class DecisionTree {
     private static Instances trainingData;
-    private Instances testingData;
+    private static Instances testingData;
 
     public static void main(String[] args) throws Exception {
 
-        DecisionTree decisionTree = new DecisionTree("src/main/input/train.arff");
-        J48 j48 = decisionTree.trainTheTree();
+        J48 decisionTree = trainTree();
+        decisionTree.buildClassifier(trainingData);
 
-        // Print the resulted tree
-        System.out.println(j48.toString());
-        SerializationHelper.write(new FileOutputStream("tree"), j48);
+        // Vypisanie stromu a jeho serializacia
+        //System.out.println(j48.toString());
+        //SerializationHelper.write(new FileOutputStream("DecisionTree"), j48);
 
-        // Test the tree
-         Instances testInstances = decisionTree.prepareTestInstance();
-//        for(Instance i : testInstances){
-//            int result = (int) id3tree.classifyInstance(i);
-//            String readableResult = decisionTree.trainingData.attribute(0).value(result);
-//            System.out.println(" ----------------------------------------- ");
-//            System.out.println("Test data               : " + (i.toDoubleArray())[0]);
-//            System.out.println("Test data classification: " + readableResult);
-//
-//        }
+        Instances testingData = prepareTestInstance();
 
-        Classifier cls = new J48();
-        cls.buildClassifier(trainingData);
-
+        // Testovanie stromu a evaluacia
         Evaluation evaluation = new Evaluation(trainingData);
-        evaluation.evaluateModel(cls, testInstances);
+        evaluation.evaluateModel(decisionTree, testingData);
         System.out.println(evaluation.toSummaryString());
         System.out.println(evaluation.toMatrixString());
 
-
     }
 
-    public DecisionTree(String fileName) {
-        BufferedReader reader = null;
-        try {
-            // Read the training data
-            reader = new BufferedReader(new FileReader(fileName));
-            trainingData = new Instances(reader);
+    public static J48 trainTree() {
 
-            // Setting class attribute
+        FileReader trainreader = null;
+        J48 decisionTree = null;
+
+        try {
+            trainreader = new FileReader("D:\\FIIT\\4. semester\\UI\\UI4\\mnist_train.arff");
+            trainingData = new Instances(trainreader);
             trainingData.setClassIndex(0);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
+
+            //Nastavenie Unpruned tree teda neobmedzeneho stromu
+            String[] options = new String[1];
+            options[0] = "-U";
+
+            decisionTree = new J48();
+            decisionTree.setOptions(options);
         }
-    }
-
-    private J48  trainTheTree() {
-        J48  j48 = new J48 ();
-
-        String[] options = new String[1];
-         //Use unpruned tree.
-        options[0] = "-U";
-
-        try {
-            j48.setOptions(options);
-            j48.buildClassifier(trainingData);
-        } catch (Exception e) {
+        catch (Exception e){
             e.printStackTrace();
         }
-
-        return j48;
+        return decisionTree;
     }
 
-    private Instances prepareTestInstance() {
+
+    public static Instances prepareTestInstance() {
 
         BufferedReader reader = null;
         try {
-            // Read the training data
-            reader = new BufferedReader(new FileReader("src/main/input/test.arff"));
+            reader = new BufferedReader(new FileReader("D:\\FIIT\\4. semester\\UI\\UI4\\mnist_test.arff"));
             testingData = new Instances(reader);
-
-            // Setting class attribute
             testingData.setClassIndex(0);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (reader != null) {
-                try {
-                    reader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-
         return testingData;
     }
 }

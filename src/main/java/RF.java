@@ -23,11 +23,16 @@ public class RF {
 
     public static void main(String[] args) throws Exception{
 
+        //Vytvor a natrenuj novy random forest
         RandomForest mlp = trainRF();
         mlp.buildClassifier(trainingData);
-        //SerializationHelper.write(new FileOutputStream("rf"), mlp);
+
+        //serializacia teda ulozenie modelu:
+        //SerializationHelper.write(new FileOutputStream("RandomForest"), mlp);
+
         testingData = prepareTestInstance();
 
+        //testovanie a vyhodnotenie modelu
         Evaluation evaluation = new Evaluation(trainingData);
         evaluation.evaluateModel(mlp, testingData);
         System.out.println(evaluation.errorRate());
@@ -39,47 +44,31 @@ public class RF {
     public static RandomForest trainRF() {
 
         FileReader trainreader = null;
-        RandomForest mlp = null;
+        RandomForest randomForest = null;
 
         try {
-            trainreader = new FileReader("src/main/input/train.arff");
+            trainreader = new FileReader("D:\\FIIT\\4. semester\\UI\\UI4\\mnist_train.arff");
             trainingData = new Instances(trainreader);
             trainingData.setClassIndex(0);
-            mlp = new RandomForest();
-            mlp.setNumIterations(10);
+            randomForest = new RandomForest();
+            //Tu sa urcuje pocet stromov v lese:
+            randomForest.setNumIterations(10);
         }
         catch (Exception e){
             e.printStackTrace();
-        }finally {
-            if (trainreader != null) {
-                try {
-                    trainreader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
-        return mlp;
+        return randomForest;
     }
 
     private static Instances prepareTestInstance() {
 
         FileReader testreader = null;
         try {
-            // Read the training data
-            testreader = new FileReader("src/main/input/test.arff");
+            testreader = new FileReader("D:\\FIIT\\4. semester\\UI\\UI4\\mnist_test.arff");
             testingData = new Instances(testreader);
             testingData.setClassIndex(0);
         } catch (IOException e) {
             e.printStackTrace();
-        } finally {
-            if (testreader != null) {
-                try {
-                    testreader.close();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
         }
         return testingData;
     }

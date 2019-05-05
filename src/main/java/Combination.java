@@ -33,7 +33,7 @@ public class Combination {
         String[] options = new String[1];
         options[0] = "-U";
         id3tree.setOptions(options);
-        id3tree.buildClassifier(trainingData);
+        //id3tree.buildClassifier(trainingData);
 
         //definiiton of Neural Network
         MultilayerPerceptron mlp = new MultilayerPerceptron();
@@ -61,11 +61,6 @@ public class Combination {
         voter.buildClassifier(trainingData);
         SerializationHelper.write(new FileOutputStream("voter"), voter);
 
-
-//Ada Boost
-//        AdaBoostM1 adaBoostM1 = new AdaBoostM1();
-//        adaBoostM1.setClassifier(classifiers);
-//        adaBoostM1.buildClassifier(trainingData);
 
         Evaluation evaluation = new Evaluation(trainingData);
         evaluation.evaluateModel(voter, testingData);

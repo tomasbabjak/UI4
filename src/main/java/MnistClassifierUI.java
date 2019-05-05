@@ -1,5 +1,4 @@
-import java.awt.Graphics;
-import java.awt.Image;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
 import java.io.*;
@@ -44,11 +43,6 @@ import static java.lang.System.err;
 
 /**
  * Test UI for MNIST classifier. User can painting digit by using mouse and predict value using a trained model. <br>
- * Run the {@link } first to build the model.
- *
- * @author jesuino
- * @author fvaleri
- * @author dariuszzbyrad
  */
 public class MnistClassifierUI extends Application {
     private static final String BASE_PATH = System.getProperty("java.io.tmpdir") + "/mnist";
@@ -88,6 +82,7 @@ public class MnistClassifierUI extends Application {
         stage.setTitle("Draw a digit and hit enter (right-click to clear)");
         stage.setResizable(false);
         stage.show();
+
 
         canvas.setOnMousePressed(e -> {
             ctx.setStroke(Color.BLACK);
@@ -182,14 +177,9 @@ public class MnistClassifierUI extends Application {
             e.printStackTrace();
         }
 
-//        CSVLoader csvLoader = new CSVLoader();
-//        csvLoader.setSource(new File("new1.csv"));
-//        Instances instances = csvLoader.getDataSet();
-//        instances.replaceAttributeAt(atr,0);
-//        instances.setClassIndex(0);
         System.out.println(instances);
 
-        Classifier classifier = (Classifier) SerializationHelper.read("voter");
+        Classifier classifier = (Classifier) SerializationHelper.read("NeuralNetwork");
         Evaluation evalTrain = new Evaluation(instances);
         evalTrain.evaluateModel(classifier, instances);
 
