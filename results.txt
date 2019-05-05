@@ -1,0 +1,553 @@
+Decision Tree
+
+Correctly Classified Instances        8933               89.33   %
+Incorrectly Classified Instances      1067               10.67   %
+Kappa statistic                          0.8814
+Mean absolute error                      0.0237
+Root mean squared error                  0.1408
+Relative absolute error                 13.1979 %
+Root relative squared error             46.9359 %
+Total Number of Instances            10000     
+
+=== Confusion Matrix ===
+
+    a    b    c    d    e    f    g    h    i    j   <-- classified as
+  939    1    9    2    2    3   11    5    5    3 |    a = 0
+    3 1088   14    7    1    4    2    1   14    1 |    b = 1
+   19    7  913   32    5    7    6   20   19    4 |    c = 2
+    4   10   37  856    5   46    2   21   20    9 |    d = 3
+    8    6   13    7  866    7    8    2   23   42 |    e = 4
+   14    9    8   46   11  735   20    9   20   20 |    f = 5
+    9    4   15    3    7   15  898    0    5    2 |    g = 6
+    3    4   24   14   12    9    0  925   17   20 |    h = 7
+   17    9   16   25   23   24   17   11  813   19 |    i = 8
+    8    6    0   15   30   16    2   12   20  900 |    j = 9
+
+
+Neural Network 
+
+Correctly Classified Instances        9506               95.06   %
+Incorrectly Classified Instances       494                4.94   %
+Kappa statistic                          0.9451
+Mean absolute error                      0.0208
+Root mean squared error                  0.089 
+Relative absolute error                 11.5331 %
+Root relative squared error             29.6581 %
+Total Number of Instances            10000 
+=== Confusion Matrix ===
+
+    a    b    c    d    e    f    g    h    i    j   <-- classified as
+  962    0    3    1    0    3    8    2    1    0 |    a = 0
+    0 1119    7    2    0    2    1    1    3    0 |    b = 1
+   10    1  987    1    7    3    7    9    6    1 |    c = 2
+    0    0   17  925    1   45    0   12    9    1 |    d = 3
+    1    4    4    0  954    1    8    1    2    7 |    e = 4
+    7    1    1    3    3  858    8    2    5    4 |    f = 5
+    7    3    2    1    7   11  925    0    2    0 |    g = 6
+    2   19   23    4   10    0    0  960    2    8 |    h = 7
+    4    4    9    7    8   19    7    4  911    1 |    i = 8
+    6    7    2    6   48   17    1   10    7  905 |    j = 9
+
+
+Random Forest 
+
+Correctly Classified Instances        9393               93.93   %
+Incorrectly Classified Instances       607                6.07   %
+Kappa statistic                          0.9325
+Mean absolute error                      0.0425
+Root mean squared error                  0.1181
+Relative absolute error                 23.6213 %
+Root relative squared error             39.3744 %
+Total Number of Instances            10000  
+
+=== Confusion Matrix ===
+
+    a    b    c    d    e    f    g    h    i    j   <-- classified as
+  963    1    4    0    0    2    7    1    0    2 |    a = 0
+    0 1124    2    3    1    1    2    1    1    0 |    b = 1
+    7    0  986    3    5    1    6   11   12    1 |    c = 2
+    5    4   24  928    1   17    2   10   15    4 |    d = 3
+    0    0    5    1  930    2    5    4    7   28 |    e = 4
+   11    1    5   37    7  807    9    4    8    3 |    f = 5
+   10    4    4    2    6   12  915    1    3    1 |    g = 6
+    3    7   23    6    7    1    0  960    7   14 |    h = 7
+   12    2   16   25   10   18    4   11  865   11 |    i = 8
+   10    6    3   12   27    7    1   14   14  915 |    j = 9
+
+Combination of previous by Voting
+
+Correctly Classified Instances        9541               95.41   %
+Incorrectly Classified Instances       459                4.59   %
+Kappa statistic                          0.949 
+Mean absolute error                      0.0289
+Root mean squared error                  0.0943
+Relative absolute error                 16.0485 %
+Root relative squared error             31.4514 %
+Total Number of Instances            10000 
+
+----------------------------------------------------------------------------------------------------------------------------------
+
+H¾adanie najdôležitejšieho bodu vo vzorke je nároèná úloha èo sa èasu týka, keïže by bolo potrebné overi nárast error rate vzorky pre každý odstránený bod obrázka rozmerov 28x28 èo je 784 bodov.
+Preto je potrebné túto úlohu zjednoduši a to tak, že predpokladáme, že na okrajoch obrázka sa nenachádzajú dôležité body a vaèšina políèok na okrajoch má hodnotu 0, èiže nie je zafarbená.
+Experimentálne to overíme tak, že z trénovacej a testovacej vzorky odrežeme 4 riadky zo všetkých štyroch strán, vykonáme uèenie a testovanie a porovnáme error rate s error rate pôvodnej vzorky. 
+Vytvoril som tak subor mnist_test_reduced.csv a mnist_train_reduced.csv
+Po vytrénovaní neurónovej siete pomocou nových testovacích a trénovacích vzoriek a rovnakých parametrov ako predtým mi vyšiel nasledujúci výsledok:
+
+Correctly Classified Instances        9623               96.23   %
+Incorrectly Classified Instances       377                3.77   %
+Kappa statistic                          0.9581
+Mean absolute error                      0.0189
+Root mean squared error                  0.0806
+Relative absolute error                 10.5225 %
+Root relative squared error             26.8807 %
+Total Number of Instances            10000     
+
+=== Confusion Matrix ===
+
+    a    b    c    d    e    f    g    h    i    j   <-- classified as
+  963    1    2    0    0    6    5    2    1    0 |    a = 0
+    0 1118    4    4    0    2    2    1    4    0 |    b = 1
+    8    3  999    1    7    1    2    6    5    0 |    c = 2
+    0    0   13  973    0    5    0    8    7    4 |    d = 3
+    2    0    4    0  950    0    7    1    2   16 |    e = 4
+    7    0    2   10    1  858    6    2    2    4 |    f = 5
+    5    3    2    1    5   13  926    0    3    0 |    g = 6
+    1    6   22    3    5    1    0  983    1    6 |    h = 7
+    5    1    6    8    6   15    5    6  920    2 |    i = 8
+    4    3    1   12   28   11    1   10    6  933 |    j = 9
+
+
+Tento výsledok je prekvapivo ešte lepší ako s celým obrázkom bez odstránených okrajov. Error rate klesol zo 4,94 % na 3,77 %.
+Ïalej teda môžeme pracova aj s takýmto redukovaným setom bez okrajov obrázkov.
+K tomu všetkému sme zmenšili obrázok na rozmery 20x20 a teda na výber nám zostáva už iba 400 bodov/atribútov, ktoré potrebujeme overi.
+
+
+Na tejto novej testovacej a trénovacej sade si teda uložím vytvorenú neurónovú sie a bude s òou ïalej pracova.
+
+
+Nasledujúci postup: Pre každý zo zvyšných 400 bodov si postupne vytvorím nový ARFF súbor z testovacieho CSV súboru, v ktorom vynulujem hodnotu na danom mieste pre všetky testovacie prvky a otestujem v NN.
+
+
+@attribute 5x5 numeric : 0.0015949539058146556
+@attribute 5x6 numeric : 0.006132648485621672
+@attribute 5x7 numeric : 0.013720570647322905
+@attribute 5x8 numeric : 0.02814930058917353
+@attribute 5x9 numeric : 0.04884988349003283
+@attribute 5x10 numeric : 0.07402678059588474
+@attribute 5x11 numeric : 0.10365187916222496
+@attribute 5x12 numeric : 0.13021112717822936
+@attribute 5x13 numeric : 0.16019454911005582
+@attribute 5x14 numeric : 0.19158204391279554
+@attribute 5x15 numeric : 0.21319395183302214
+@attribute 5x16 numeric : 0.22364002421084805
+@attribute 5x17 numeric : 0.21176984543211086
+@attribute 5x18 numeric : 0.17504129548000558
+@attribute 5x19 numeric : 0.12912955222080535
+@attribute 5x20 numeric : 0.08729031199027304
+@attribute 5x21 numeric : 0.05216105144248484
+@attribute 5x22 numeric : 0.03008433252946041
+@attribute 5x23 numeric : 0.021751095437625878
+@attribute 5x24 numeric : 0.01705705332134988
+@attribute 6x5 numeric : 0.007134680066303023
+@attribute 6x6 numeric : 0.01727504989521167
+@attribute 6x7 numeric : 0.03371484486893728
+@attribute 6x8 numeric : 0.06061600217874341
+@attribute 6x9 numeric : 0.09598263931713591
+@attribute 6x10 numeric : 0.13478130329544635
+@attribute 6x11 numeric : 0.17070749171297628
+@attribute 6x12 numeric : 0.20613720296850957
+@attribute 6x13 numeric : 0.23851382753669803
+@attribute 6x14 numeric : 0.2772699012295545
+@attribute 6x15 numeric : 0.30967247952051213
+@attribute 6x16 numeric : 0.32704675745515877
+@attribute 6x17 numeric : 0.3024591572370068
+@attribute 6x18 numeric : 0.25130875018263854
+@attribute 6x19 numeric : 0.18964256177509142
+@attribute 6x20 numeric : 0.13735549979681272
+@attribute 6x21 numeric : 0.1023790607501387
+@attribute 6x22 numeric : 0.07893151457588798
+@attribute 6x23 numeric : 0.066159782762929
+@attribute 6x24 numeric : 0.05684324971452126
+@attribute 7x5 numeric : 0.011665230474507737
+@attribute 7x6 numeric : 0.026315950563069013
+@attribute 7x7 numeric : 0.05041512287231731
+@attribute 7x8 numeric : 0.07767025649746095
+@attribute 7x9 numeric : 0.11131010963920174
+@attribute 7x10 numeric : 0.14001361761749198
+@attribute 7x11 numeric : 0.166282339556993
+@attribute 7x12 numeric : 0.18304320230329552
+@attribute 7x13 numeric : 0.19455031753695584
+@attribute 7x14 numeric : 0.21217588091403616
+@attribute 7x15 numeric : 0.2463529878997548
+@attribute 7x16 numeric : 0.2558062719555947
+@attribute 7x17 numeric : 0.24242400949199583
+@attribute 7x18 numeric : 0.20777378234434662
+@attribute 7x19 numeric : 0.17601886414988632
+@attribute 7x20 numeric : 0.1504357277322601
+@attribute 7x21 numeric : 0.12915453813756006
+@attribute 7x22 numeric : 0.1109465523297688
+@attribute 7x23 numeric : 0.09891328127826515
+@attribute 7x24 numeric : 0.08975839175938027
+@attribute 8x5 numeric : 0.022536864409172797
+@attribute 8x6 numeric : 0.04089507933567704
+@attribute 8x7 numeric : 0.062050939878589784
+@attribute 8x8 numeric : 0.08309939566968128
+@attribute 8x9 numeric : 0.09898281847882062
+@attribute 8x10 numeric : 0.11455681253701577
+@attribute 8x11 numeric : 0.12363617027491491
+@attribute 8x12 numeric : 0.12937530976210176
+@attribute 8x13 numeric : 0.13104589124748278
+@attribute 8x14 numeric : 0.13371096824166928
+@attribute 8x15 numeric : 0.15174783651132007
+@attribute 8x16 numeric : 0.15888970196980612
+@attribute 8x17 numeric : 0.15311439094648494
+@attribute 8x18 numeric : 0.14510601416187185
+@attribute 8x19 numeric : 0.15220828938099729
+@attribute 8x20 numeric : 0.1571934414698939
+@attribute 8x21 numeric : 0.14512055684795522
+@attribute 8x22 numeric : 0.12581537047264701
+@attribute 8x23 numeric : 0.11011306931082787
+@attribute 8x24 numeric : 0.10001206141859376
+@attribute 9x5 numeric : 0.03713190346028883
+@attribute 9x6 numeric : 0.054831126950010134
+@attribute 9x7 numeric : 0.07100893254123575
+@attribute 9x8 numeric : 0.08453429136445667
+@attribute 9x9 numeric : 0.09696530986438923
+@attribute 9x10 numeric : 0.12214578148418598
+@attribute 9x11 numeric : 0.1555075677129305
+@attribute 9x12 numeric : 0.18434844568736253
+@attribute 9x13 numeric : 0.18507363043686365
+@attribute 9x14 numeric : 0.1509957995198179
+@attribute 9x15 numeric : 0.13423429871119597
+@attribute 9x16 numeric : 0.14485802820160298
+@attribute 9x17 numeric : 0.1457284916576027
+@attribute 9x18 numeric : 0.15026849466897607
+@attribute 9x19 numeric : 0.16853079525764247
+@attribute 9x20 numeric : 0.18210031048155795
+@attribute 9x21 numeric : 0.17383301826771458
+@attribute 9x22 numeric : 0.14620085980281816
+@attribute 9x23 numeric : 0.11654569304976459
+@attribute 9x24 numeric : 0.09712018451397508
+@attribute 10x5 numeric : 0.042604372514631006
+@attribute 10x6 numeric : 0.05750659197363772
+@attribute 10x7 numeric : 0.07119249968593211
+@attribute 10x8 numeric : 0.08988173842218128
+@attribute 10x9 numeric : 0.12317953132345316
+@attribute 10x10 numeric : 0.18114025146538815
+@attribute 10x11 numeric : 0.24741709813485713
+@attribute 10x12 numeric : 0.26932127454956944
+@attribute 10x13 numeric : 0.21433452598985925
+@attribute 10x14 numeric : 0.13687080029129506
+@attribute 10x15 numeric : 0.12847120041611948
+@attribute 10x16 numeric : 0.16737266136290785
+@attribute 10x17 numeric : 0.15897823116298415
+@attribute 10x18 numeric : 0.1697041630870575
+@attribute 10x19 numeric : 0.19655847381937752
+@attribute 10x20 numeric : 0.20747377176479054
+@attribute 10x21 numeric : 0.1967148080595429
+@attribute 10x22 numeric : 0.1686694477396684
+@attribute 10x23 numeric : 0.12920784293152598
+@attribute 10x24 numeric : 0.09368080069153928
+@attribute 11x5 numeric : 0.038012112635926076
+@attribute 11x6 numeric : 0.04975863827209981
+@attribute 11x7 numeric : 0.06590101153533512
+@attribute 11x8 numeric : 0.1006644363076088
+@attribute 11x9 numeric : 0.16216065352934006
+@attribute 11x10 numeric : 0.2432912873761186
+@attribute 11x11 numeric : 0.2970625786229446
+@attribute 11x12 numeric : 0.26299558231332965
+@attribute 11x13 numeric : 0.16125460484383236
+@attribute 11x14 numeric : 0.08317088865878475
+@attribute 11x15 numeric : 0.13675894640343245
+@attribute 11x16 numeric : 0.195233220027081
+@attribute 11x17 numeric : 0.15352055009753363
+@attribute 11x18 numeric : 0.17202187747290276
+@attribute 11x19 numeric : 0.2181401045211424
+@attribute 11x20 numeric : 0.2162035556073163
+@attribute 11x21 numeric : 0.1999533458891305
+@attribute 11x22 numeric : 0.1814267355002097
+@attribute 11x23 numeric : 0.14542026099264183
+@attribute 11x24 numeric : 0.09918850915535993
+@attribute 12x5 numeric : 0.027526465851372084
+@attribute 12x6 numeric : 0.04174170536087862
+@attribute 12x7 numeric : 0.06944745941892272
+@attribute 12x8 numeric : 0.12920436390868684
+@attribute 12x9 numeric : 0.21286832411467538
+@attribute 12x10 numeric : 0.28886566988920004
+@attribute 12x11 numeric : 0.29726888396062146
+@attribute 12x12 numeric : 0.24546729609467954
+@attribute 12x13 numeric : 0.15179404117029183
+@attribute 12x14 numeric : 0.1265919035570895
+@attribute 12x15 numeric : 0.23997710280723483
+@attribute 12x16 numeric : 0.2577397564800914
+@attribute 12x17 numeric : 0.15942047289409533
+@attribute 12x18 numeric : 0.19393969862710714
+@attribute 12x19 numeric : 0.2472684212750229
+@attribute 12x20 numeric : 0.21088009401716779
+@attribute 12x21 numeric : 0.1884715813882063
+@attribute 12x22 numeric : 0.1965090053912424
+@attribute 12x23 numeric : 0.17060361308935468
+@attribute 12x24 numeric : 0.1198709875748416
+@attribute 13x5 numeric : 0.01951484310185858
+@attribute 13x6 numeric : 0.045709927268872796
+@attribute 13x7 numeric : 0.09130051611019674
+@attribute 13x8 numeric : 0.16903245465209293
+@attribute 13x9 numeric : 0.25783287506850927
+@attribute 13x10 numeric : 0.3106341797153678
+@attribute 13x11 numeric : 0.301833071980794
+@attribute 13x12 numeric : 0.26625100199612506
+@attribute 13x13 numeric : 0.22046309690019816
+@attribute 13x14 numeric : 0.25885681443128705
+@attribute 13x15 numeric : 0.35899572100276167
+@attribute 13x16 numeric : 0.29767487318917274
+@attribute 13x17 numeric : 0.18152056783343573
+@attribute 13x18 numeric : 0.23884242670072364
+@attribute 13x19 numeric : 0.2517766940567405
+@attribute 13x20 numeric : 0.18006115991474436
+@attribute 13x21 numeric : 0.1681925999891969
+@attribute 13x22 numeric : 0.20221047412456405
+@attribute 13x23 numeric : 0.19318559500380283
+@attribute 13x24 numeric : 0.13631653800916066
+@attribute 14x5 numeric : 0.01792808639849497
+@attribute 14x6 numeric : 0.059583026123958494
+@attribute 14x7 numeric : 0.12332967063196643
+@attribute 14x8 numeric : 0.21001003329179468
+@attribute 14x9 numeric : 0.2916778820633983
+@attribute 14x10 numeric : 0.31882646251176316
+@attribute 14x11 numeric : 0.2941673357598722
+@attribute 14x12 numeric : 0.27387300381103197
+@attribute 14x13 numeric : 0.26506656158381325
+@attribute 14x14 numeric : 0.3421698169365093
+@attribute 14x15 numeric : 0.40150943135619643
+@attribute 14x16 numeric : 0.29655270893666996
+@attribute 14x17 numeric : 0.230321636688537
+@attribute 14x18 numeric : 0.29819431631807536
+@attribute 14x19 numeric : 0.2488650890212556
+@attribute 14x20 numeric : 0.15789421609093646
+@attribute 14x21 numeric : 0.16046486542860894
+@attribute 14x22 numeric : 0.21038698870892647
+@attribute 14x23 numeric : 0.2036867475876032
+@attribute 14x24 numeric : 0.1421914311098349
+@attribute 15x5 numeric : 0.02029440491259349
+@attribute 15x6 numeric : 0.08211468619177786
+@attribute 15x7 numeric : 0.1567921320602812
+@attribute 15x8 numeric : 0.243145346879718
+@attribute 15x9 numeric : 0.3086086041827949
+@attribute 15x10 numeric : 0.3117566258824547
+@attribute 15x11 numeric : 0.2709696992800592
+@attribute 15x12 numeric : 0.23119919965765012
+@attribute 15x13 numeric : 0.24193256493717197
+@attribute 15x14 numeric : 0.33363619585323256
+@attribute 15x15 numeric : 0.3958168522057117
+@attribute 15x16 numeric : 0.27078596398124644
+@attribute 15x17 numeric : 0.2798394938480233
+@attribute 15x18 numeric : 0.34185646343092335
+@attribute 15x19 numeric : 0.24734831284310177
+@attribute 15x20 numeric : 0.16125714581581718
+@attribute 15x21 numeric : 0.1801997462666418
+@attribute 15x22 numeric : 0.21999582812132124
+@attribute 15x23 numeric : 0.19632147670763977
+@attribute 15x24 numeric : 0.13262719762277575
+@attribute 16x5 numeric : 0.024774972362398007
+@attribute 16x6 numeric : 0.10025722919536095
+@attribute 16x7 numeric : 0.18195401726015703
+@attribute 16x8 numeric : 0.2636458361730565
+@attribute 16x9 numeric : 0.31188475730883614
+@attribute 16x10 numeric : 0.3022880458502013
+@attribute 16x11 numeric : 0.2629942027118011
+@attribute 16x12 numeric : 0.2265177272129324
+@attribute 16x13 numeric : 0.2597538129839818
+@attribute 16x14 numeric : 0.35244835411454734
+@attribute 16x15 numeric : 0.3772437012550389
+@attribute 16x16 numeric : 0.26944186774091206
+@attribute 16x17 numeric : 0.3103274313483815
+@attribute 16x18 numeric : 0.3218742487696655
+@attribute 16x19 numeric : 0.2232153224823774
+@attribute 16x20 numeric : 0.1766178777100822
+@attribute 16x21 numeric : 0.20728518142881525
+@attribute 16x22 numeric : 0.22058985192706615
+@attribute 16x23 numeric : 0.18080812018308823
+@attribute 16x24 numeric : 0.11326741134391316
+@attribute 17x5 numeric : 0.03264678418229616
+@attribute 17x6 numeric : 0.1143913908190819
+@attribute 17x7 numeric : 0.19220291552533064
+@attribute 17x8 numeric : 0.262030526293231
+@attribute 17x9 numeric : 0.28853407875822645
+@attribute 17x10 numeric : 0.27414986781590267
+@attribute 17x11 numeric : 0.25135650875245075
+@attribute 17x12 numeric : 0.24916148768099022
+@attribute 17x13 numeric : 0.29067528327051484
+@attribute 17x14 numeric : 0.3666279222119142
+@attribute 17x15 numeric : 0.3440811016128196
+@attribute 17x16 numeric : 0.2557411445000457
+@attribute 17x17 numeric : 0.2837451680163694
+@attribute 17x18 numeric : 0.2454689121811331
+@attribute 17x19 numeric : 0.1804422289318901
+@attribute 17x20 numeric : 0.19553541028519295
+@attribute 17x21 numeric : 0.22945450311708093
+@attribute 17x22 numeric : 0.20909882330378693
+@attribute 17x23 numeric : 0.1549804894143465
+@attribute 17x24 numeric : 0.0927090423676713
+@attribute 18x5 numeric : 0.04275782044349885
+@attribute 18x6 numeric : 0.12430001903127641
+@attribute 18x7 numeric : 0.19581430627152496
+@attribute 18x8 numeric : 0.25232104342609185
+@attribute 18x9 numeric : 0.2623559218693887
+@attribute 18x10 numeric : 0.2540343982415667
+@attribute 18x11 numeric : 0.25702674137148174
+@attribute 18x12 numeric : 0.26911874239771905
+@attribute 18x13 numeric : 0.29303832055827606
+@attribute 18x14 numeric : 0.3351102140678459
+@attribute 18x15 numeric : 0.27470860433783173
+@attribute 18x16 numeric : 0.20233735051958313
+@attribute 18x17 numeric : 0.20209637872990527
+@attribute 18x18 numeric : 0.16289122896848385
+@attribute 18x19 numeric : 0.16893080014124173
+@attribute 18x20 numeric : 0.22855685405589288
+@attribute 18x21 numeric : 0.24272241769970426
+@attribute 18x22 numeric : 0.19646722470349332
+@attribute 18x23 numeric : 0.1320041153839484
+@attribute 18x24 numeric : 0.07954166718520517
+@attribute 19x5 numeric : 0.05862692905299438
+@attribute 19x6 numeric : 0.13840325959927657
+@attribute 19x7 numeric : 0.209007054189295
+@attribute 19x8 numeric : 0.2565093084026082
+@attribute 19x9 numeric : 0.2635647247407249
+@attribute 19x10 numeric : 0.26752412038149975
+@attribute 19x11 numeric : 0.29477185213300716
+@attribute 19x12 numeric : 0.29084763560625015
+@attribute 19x13 numeric : 0.2753617512278592
+@attribute 19x14 numeric : 0.26396775020081975
+@attribute 19x15 numeric : 0.18385674834600207
+@attribute 19x16 numeric : 0.12530328612696806
+@attribute 19x17 numeric : 0.11386070755172195
+@attribute 19x18 numeric : 0.1388029773870243
+@attribute 19x19 numeric : 0.21295109939364787
+@attribute 19x20 numeric : 0.2610154078974416
+@attribute 19x21 numeric : 0.23609987842978297
+@attribute 19x22 numeric : 0.17540082188319994
+@attribute 19x23 numeric : 0.12030380922040163
+@attribute 19x24 numeric : 0.07627942762009621
+@attribute 20x5 numeric : 0.07298279943502584
+@attribute 20x6 numeric : 0.14912210110991841
+@attribute 20x7 numeric : 0.22927958122447611
+@attribute 20x8 numeric : 0.28477468406249784
+@attribute 20x9 numeric : 0.30220704115557817
+@attribute 20x10 numeric : 0.3032659028418263
+@attribute 20x11 numeric : 0.31692907947137305
+@attribute 20x12 numeric : 0.286594812654247
+@attribute 20x13 numeric : 0.2327803705331699
+@attribute 20x14 numeric : 0.18245157892231312
+@attribute 20x15 numeric : 0.11143312606554057
+@attribute 20x16 numeric : 0.07235719173621336
+@attribute 20x17 numeric : 0.10168836021555672
+@attribute 20x18 numeric : 0.18302638857160858
+@attribute 20x19 numeric : 0.2501259401408684
+@attribute 20x20 numeric : 0.2552139540643612
+@attribute 20x21 numeric : 0.20363802710470846
+@attribute 20x22 numeric : 0.1523797089505856
+@attribute 20x23 numeric : 0.10911313664112976
+@attribute 20x24 numeric : 0.07593412744858119
+@attribute 21x5 numeric : 0.07503906800139504
+@attribute 21x6 numeric : 0.1473727754378742
+@attribute 21x7 numeric : 0.2333880299315454
+@attribute 21x8 numeric : 0.3074099913758368
+@attribute 21x9 numeric : 0.3367450272300303
+@attribute 21x10 numeric : 0.3279015097367375
+@attribute 21x11 numeric : 0.29271732937316797
+@attribute 21x12 numeric : 0.23760553128023032
+@attribute 21x13 numeric : 0.18206653377039173
+@attribute 21x14 numeric : 0.13119876181568024
+@attribute 21x15 numeric : 0.08471041833461435
+@attribute 21x16 numeric : 0.08315809695991261
+@attribute 21x17 numeric : 0.129431889918056
+@attribute 21x18 numeric : 0.1935526490862567
+@attribute 21x19 numeric : 0.21665538575659538
+@attribute 21x20 numeric : 0.19234935542286635
+@attribute 21x21 numeric : 0.1540785262826878
+@attribute 21x22 numeric : 0.1197978039326344
+@attribute 21x23 numeric : 0.09022064639683247
+@attribute 21x24 numeric : 0.06647921567631832
+@attribute 22x5 numeric : 0.06752438303857078
+@attribute 22x6 numeric : 0.12416170920871572
+@attribute 22x7 numeric : 0.20852101572414217
+@attribute 22x8 numeric : 0.28175206558393073
+@attribute 22x9 numeric : 0.3248916137791138
+@attribute 22x10 numeric : 0.31772664277527074
+@attribute 22x11 numeric : 0.25886184963092385
+@attribute 22x12 numeric : 0.17669641968026184
+@attribute 22x13 numeric : 0.11488320780781125
+@attribute 22x14 numeric : 0.08847095302594665
+@attribute 22x15 numeric : 0.08095211527449031
+@attribute 22x16 numeric : 0.09864840996438451
+@attribute 22x17 numeric : 0.13097842024406692
+@attribute 22x18 numeric : 0.15037345068156727
+@attribute 22x19 numeric : 0.14506956128047221
+@attribute 22x20 numeric : 0.12534728574564813
+@attribute 22x21 numeric : 0.10066490866887623
+@attribute 22x22 numeric : 0.08103557459425081
+@attribute 22x23 numeric : 0.06472101928436436
+@attribute 22x24 numeric : 0.048344396923375665
+@attribute 23x5 numeric : 0.04603319625113578
+@attribute 23x6 numeric : 0.08617958345720078
+@attribute 23x7 numeric : 0.14736333203162388
+@attribute 23x8 numeric : 0.2071285876615252
+@attribute 23x9 numeric : 0.25546149392874407
+@attribute 23x10 numeric : 0.2728184077291371
+@attribute 23x11 numeric : 0.2543928396795345
+@attribute 23x12 numeric : 0.2104499390559056
+@attribute 23x13 numeric : 0.1694938240730517
+@attribute 23x14 numeric : 0.15446670893845615
+@attribute 23x15 numeric : 0.14474366465350075
+@attribute 23x16 numeric : 0.13236627488872488
+@attribute 23x17 numeric : 0.11945652459452161
+@attribute 23x18 numeric : 0.10464043182977134
+@attribute 23x19 numeric : 0.08848185922162921
+@attribute 23x20 numeric : 0.07286438654633631
+@attribute 23x21 numeric : 0.05755067740308384
+@attribute 23x22 numeric : 0.04752269648805729
+@attribute 23x23 numeric : 0.03820427502000667
+@attribute 23x24 numeric : 0.027568059041002346
+@attribute 24x5 numeric : 0.02178588423428618
+@attribute 24x6 numeric : 0.039021206999058755
+@attribute 24x7 numeric : 0.07137086338944698
+@attribute 24x8 numeric : 0.10641121927553243
+@attribute 24x9 numeric : 0.14543908746489542
+@attribute 24x10 numeric : 0.1824451016764348
+@attribute 24x11 numeric : 0.21432814770632014
+@attribute 24x12 numeric : 0.23748661441380303
+@attribute 24x13 numeric : 0.24976690670610813
+@attribute 24x14 numeric : 0.2402039119687429
+@attribute 24x15 numeric : 0.20270677782853408
+@attribute 24x16 numeric : 0.15434102843157227
+@attribute 24x17 numeric : 0.11807898499385772
+@attribute 24x18 numeric : 0.09019401315273523
+@attribute 24x19 numeric : 0.06635003056874966
+@attribute 24x20 numeric : 0.04646264665370703
+@attribute 24x21 numeric : 0.03198248712384766
+@attribute 24x22 numeric : 0.022245817623905317
+@attribute 24x23 numeric : 0.015795391403597314
+@attribute 24x24 numeric : 0.010224637919195256
+
+{@attribute 14x15 numeric=0.40150943135619643, @attribute 15x15 numeric=0.3958168522057117, @attribute 16x15 numeric=0.3772437012550389, @attribute 17x14 numeric=0.3666279222119142, @attribute 13x15 numeric=0.35899572100276167, @attribute 16x14 numeric=0.35244835411454734, @attribute 17x15 numeric=0.3440811016128196, @attribute 14x14 numeric=0.3421698169365093, @attribute 15x18 numeric=0.34185646343092335, @attribute 21x9 numeric=0.3367450272300303, @attribute 18x14 numeric=0.3351102140678459, @attribute 15x14 numeric=0.33363619585323256, @attribute 21x10 numeric=0.3279015097367375, @attribute 6x16 numeric=0.32704675745515877, @attribute 22x9 numeric=0.3248916137791138, @attribute 16x18 numeric=0.3218742487696655, @attribute 14x10 numeric=0.31882646251176316, @attribute 22x10 numeric=0.31772664277527074, @attribute 20x11 numeric=0.31692907947137305, @attribute 16x9 numeric=0.31188475730883614, @attribute 15x10 numeric=0.3117566258824547, @attribute 13x10 numeric=0.3106341797153678, @attribute 16x17 numeric=0.3103274313483815, @attribute 6x15 numeric=0.30967247952051213, @attribute 15x9 numeric=0.3086086041827949, @attribute 21x8 numeric=0.3074099913758368, @attribute 20x10 numeric=0.3032659028418263, @attribute 6x17 numeric=0.3024591572370068, @attribute 16x10 numeric=0.3022880458502013, @attribute 20x9 numeric=0.30220704115557817, @attribute 13x11 numeric=0.301833071980794, @attribute 14x18 numeric=0.29819431631807536, @attribute 13x16 numeric=0.29767487318917274, @attribute 12x11 numeric=0.29726888396062146, @attribute 11x11 numeric=0.2970625786229446, @attribute 14x16 numeric=0.29655270893666996, @attribute 19x11 numeric=0.29477185213300716, @attribute 14x11 numeric=0.2941673357598722, @attribute 18x13 numeric=0.29303832055827606, @attribute 21x11 numeric=0.29271732937316797, @attribute 14x9 numeric=0.2916778820633983, @attribute 19x12 numeric=0.29084763560625015, @attribute 17x13 numeric=0.29067528327051484, @attribute 12x10 numeric=0.28886566988920004, @attribute 17x9 numeric=0.28853407875822645, @attribute 20x12 numeric=0.286594812654247, @attribute 20x8 numeric=0.28477468406249784, @attribute 17x17 numeric=0.2837451680163694, @attribute 22x8 numeric=0.28175206558393073, @attribute 15x17 numeric=0.2798394938480233, @attribute 6x14 numeric=0.2772699012295545, @attribute 19x13 numeric=0.2753617512278592, @attribute 18x15 numeric=0.27470860433783173, @attribute 17x10 numeric=0.27414986781590267, @attribute 14x12 numeric=0.27387300381103197, @attribute 23x10 numeric=0.2728184077291371, @attribute 15x11 numeric=0.2709696992800592, @attribute 15x16 numeric=0.27078596398124644, @attribute 16x16 numeric=0.26944186774091206, @attribute 10x12 numeric=0.26932127454956944, @attribute 18x12 numeric=0.26911874239771905, @attribute 19x10 numeric=0.26752412038149975, @attribute 13x12 numeric=0.26625100199612506, @attribute 14x13 numeric=0.26506656158381325, @attribute 19x14 numeric=0.26396775020081975, @attribute 16x8 numeric=0.2636458361730565, @attribute 19x9 numeric=0.2635647247407249, @attribute 11x12 numeric=0.26299558231332965, @attribute 16x11 numeric=0.2629942027118011, @attribute 18x9 numeric=0.2623559218693887, @attribute 17x8 numeric=0.262030526293231, @attribute 19x20 numeric=0.2610154078974416, @attribute 16x13 numeric=0.2597538129839818, @attribute 22x11 numeric=0.25886184963092385, @attribute 13x14 numeric=0.25885681443128705, @attribute 13x9 numeric=0.25783287506850927, @attribute 12x16 numeric=0.2577397564800914, @attribute 18x11 numeric=0.25702674137148174, @attribute 19x8 numeric=0.2565093084026082, @attribute 7x16 numeric=0.2558062719555947, @attribute 17x16 numeric=0.2557411445000457, @attribute 23x9 numeric=0.25546149392874407, @attribute 20x20 numeric=0.2552139540643612, @attribute 23x11 numeric=0.2543928396795345, @attribute 18x10 numeric=0.2540343982415667, @attribute 18x8 numeric=0.25232104342609185, @attribute 13x19 numeric=0.2517766940567405, @attribute 17x11 numeric=0.25135650875245075, @attribute 6x18 numeric=0.25130875018263854, @attribute 20x19 numeric=0.2501259401408684, @attribute 24x13 numeric=0.24976690670610813, @attribute 17x12 numeric=0.24916148768099022, @attribute 14x19 numeric=0.2488650890212556, @attribute 10x11 numeric=0.24741709813485713, @attribute 15x19 numeric=0.24734831284310177, @attribute 12x19 numeric=0.2472684212750229, @attribute 7x15 numeric=0.2463529878997548, @attribute 17x18 numeric=0.2454689121811331, @attribute 12x12 numeric=0.24546729609467954, @attribute 11x10 numeric=0.2432912873761186, @attribute 15x8 numeric=0.243145346879718, @attribute 18x21 numeric=0.24272241769970426, @attribute 7x17 numeric=0.24242400949199583, @attribute 15x13 numeric=0.24193256493717197, @attribute 24x14 numeric=0.2402039119687429, @attribute 12x15 numeric=0.23997710280723483, @attribute 13x18 numeric=0.23884242670072364, @attribute 6x13 numeric=0.23851382753669803, @attribute 21x12 numeric=0.23760553128023032, @attribute 24x12 numeric=0.23748661441380303, @attribute 19x21 numeric=0.23609987842978297, @attribute 21x7 numeric=0.2333880299315454, @attribute 20x13 numeric=0.2327803705331699, @attribute 15x12 numeric=0.23119919965765012, @attribute 14x17 numeric=0.230321636688537, @attribute 17x21 numeric=0.22945450311708093, @attribute 20x7 numeric=0.22927958122447611, @attribute 18x20 numeric=0.22855685405589288, @attribute 16x12 numeric=0.2265177272129324, @attribute 5x16 numeric=0.22364002421084805, @attribute 16x19 numeric=0.2232153224823774, @attribute 16x22 numeric=0.22058985192706615, @attribute 13x13 numeric=0.22046309690019816, @attribute 15x22 numeric=0.21999582812132124, @attribute 11x19 numeric=0.2181401045211424, @attribute 21x19 numeric=0.21665538575659538, @attribute 11x20 numeric=0.2162035556073163, @attribute 10x13 numeric=0.21433452598985925, @attribute 24x11 numeric=0.21432814770632014, @attribute 5x15 numeric=0.21319395183302214, @attribute 19x19 numeric=0.21295109939364787, @attribute 12x9 numeric=0.21286832411467538, @attribute 7x14 numeric=0.21217588091403616, @attribute 5x17 numeric=0.21176984543211086, @attribute 12x20 numeric=0.21088009401716779, @attribute 23x12 numeric=0.2104499390559056, @attribute 14x22 numeric=0.21038698870892647, @attribute 14x8 numeric=0.21001003329179468, @attribute 17x22 numeric=0.20909882330378693, @attribute 19x7 numeric=0.209007054189295, @attribute 22x7 numeric=0.20852101572414217, @attribute 7x18 numeric=0.20777378234434662, @attribute 10x20 numeric=0.20747377176479054, @attribute 16x21 numeric=0.20728518142881525, @attribute 23x8 numeric=0.2071285876615252, @attribute 6x12 numeric=0.20613720296850957, @attribute 14x23 numeric=0.2036867475876032, @attribute 20x21 numeric=0.20363802710470846, @attribute 24x15 numeric=0.20270677782853408, @attribute 18x16 numeric=0.20233735051958313, @attribute 13x22 numeric=0.20221047412456405, @attribute 18x17 numeric=0.20209637872990527, @attribute 11x21 numeric=0.1999533458891305, @attribute 10x21 numeric=0.1967148080595429, @attribute 10x19 numeric=0.19655847381937752, @attribute 12x22 numeric=0.1965090053912424, @attribute 18x22 numeric=0.19646722470349332, @attribute 15x23 numeric=0.19632147670763977, @attribute 18x7 numeric=0.19581430627152496, @attribute 17x20 numeric=0.19553541028519295, @attribute 11x16 numeric=0.195233220027081, @attribute 7x13 numeric=0.19455031753695584, @attribute 12x18 numeric=0.19393969862710714, @attribute 21x18 numeric=0.1935526490862567, @attribute 13x23 numeric=0.19318559500380283, @attribute 21x20 numeric=0.19234935542286635, @attribute 17x7 numeric=0.19220291552533064, @attribute 5x14 numeric=0.19158204391279554, @attribute 6x19 numeric=0.18964256177509142, @attribute 12x21 numeric=0.1884715813882063, @attribute 9x13 numeric=0.18507363043686365, @attribute 9x12 numeric=0.18434844568736253, @attribute 19x15 numeric=0.18385674834600207, @attribute 7x12 numeric=0.18304320230329552, @attribute 20x18 numeric=0.18302638857160858, @attribute 20x14 numeric=0.18245157892231312, @attribute 24x10 numeric=0.1824451016764348, @attribute 9x20 numeric=0.18210031048155795, @attribute 21x13 numeric=0.18206653377039173, @attribute 16x7 numeric=0.18195401726015703, @attribute 13x17 numeric=0.18152056783343573, @attribute 11x22 numeric=0.1814267355002097, @attribute 10x10 numeric=0.18114025146538815, @attribute 16x23 numeric=0.18080812018308823, @attribute 17x19 numeric=0.1804422289318901, @attribute 15x21 numeric=0.1801997462666418, @attribute 13x20 numeric=0.18006115991474436, @attribute 22x12 numeric=0.17669641968026184, @attribute 16x20 numeric=0.1766178777100822, @attribute 7x19 numeric=0.17601886414988632, @attribute 19x22 numeric=0.17540082188319994, @attribute 5x18 numeric=0.17504129548000558, @attribute 9x21 numeric=0.17383301826771458, @attribute 11x18 numeric=0.17202187747290276, @attribute 6x11 numeric=0.17070749171297628, @attribute 12x23 numeric=0.17060361308935468, @attribute 10x18 numeric=0.1697041630870575, @attribute 23x13 numeric=0.1694938240730517, @attribute 13x8 numeric=0.16903245465209293, @attribute 18x19 numeric=0.16893080014124173, @attribute 10x22 numeric=0.1686694477396684, @attribute 9x19 numeric=0.16853079525764247, @attribute 13x21 numeric=0.1681925999891969, @attribute 10x16 numeric=0.16737266136290785, @attribute 4x17 numeric=0.16663099487002597, @attribute 26x13 numeric=0.16650109142587022, @attribute 7x11 numeric=0.166282339556993, @attribute 25x13 numeric=0.1657546654210189, @attribute 18x18 numeric=0.16289122896848385, @attribute 11x9 numeric=0.16216065352934006, @attribute 15x20 numeric=0.16125714581581718, @attribute 11x13 numeric=0.16125460484383236, @attribute 14x21 numeric=0.16046486542860894, @attribute 25x14 numeric=0.16021855893287462, @attribute 5x13 numeric=0.16019454911005582, @attribute 4x16 numeric=0.15943795097078794, @attribute 12x17 numeric=0.15942047289409533, @attribute 10x17 numeric=0.15897823116298415, @attribute 26x14 numeric=0.1588985618266845, @attribute 8x16 numeric=0.15888970196980612, @attribute 14x20 numeric=0.15789421609093646, @attribute 8x20 numeric=0.1571934414698939, @attribute 15x7 numeric=0.1567921320602812, @attribute 9x11 numeric=0.1555075677129305, @attribute 17x23 numeric=0.1549804894143465, @attribute 26x12 numeric=0.15450485461358987, @attribute 23x14 numeric=0.15446670893845615, @attribute 24x16 numeric=0.15434102843157227, @attribute 21x21 numeric=0.1540785262826878, @attribute 4x18 numeric=0.1536834118693, @attribute 11x17 numeric=0.15352055009753363, @attribute 8x17 numeric=0.15311439094648494, @attribute 20x22 numeric=0.1523797089505856, @attribute 8x19 numeric=0.15220828938099729, @attribute 12x13 numeric=0.15179404117029183, @attribute 8x15 numeric=0.15174783651132007, @attribute 9x14 numeric=0.1509957995198179, @attribute 7x20 numeric=0.1504357277322601, @attribute 22x18 numeric=0.15037345068156727, @attribute 9x18 numeric=0.15026849466897607, @attribute 25x12 numeric=0.15021266577012193, @attribute 20x6 numeric=0.14912210110991841, @attribute 21x6 numeric=0.1473727754378742, @attribute 23x7 numeric=0.14736333203162388, @attribute 9x22 numeric=0.14620085980281816, @attribute 9x17 numeric=0.1457284916576027, @attribute 24x9 numeric=0.14543908746489542, @attribute 11x23 numeric=0.14542026099264183, @attribute 8x21 numeric=0.14512055684795522, @attribute 8x18 numeric=0.14510601416187185, @attribute 22x19 numeric=0.14506956128047221, @attribute 9x16 numeric=0.14485802820160298, @attribute 23x15 numeric=0.14474366465350075, @attribute 14x24 numeric=0.1421914311098349, @attribute 25x15 numeric=0.14112137439396344, @attribute 26x15 numeric=0.14029807038767217, @attribute 7x10 numeric=0.14001361761749198, @attribute 4x15 numeric=0.13973597010806804, @attribute 19x18 numeric=0.1388029773870243, @attribute 19x6 numeric=0.13840325959927657, @attribute 6x20 numeric=0.13735549979681272, @attribute 10x14 numeric=0.13687080029129506, @attribute 11x15 numeric=0.13675894640343245, @attribute 13x24 numeric=0.13631653800916066, @attribute 6x10 numeric=0.13478130329544635, @attribute 9x15 numeric=0.13423429871119597, @attribute 8x14 numeric=0.13371096824166928, @attribute 15x24 numeric=0.13262719762277575, @attribute 23x16 numeric=0.13236627488872488, @attribute 18x23 numeric=0.1320041153839484, @attribute 21x14 numeric=0.13119876181568024, @attribute 8x13 numeric=0.13104589124748278, @attribute 22x17 numeric=0.13097842024406692, @attribute 5x12 numeric=0.13021112717822936, @attribute 21x17 numeric=0.129431889918056, @attribute 8x12 numeric=0.12937530976210176, @attribute 10x23 numeric=0.12920784293152598, @attribute 12x8 numeric=0.12920436390868684, @attribute 7x21 numeric=0.12915453813756006, @attribute 5x19 numeric=0.12912955222080535, @attribute 10x15 numeric=0.12847120041611948, @attribute 12x14 numeric=0.1265919035570895, @attribute 8x22 numeric=0.12581537047264701, @attribute 26x11 numeric=0.12560577465904554, @attribute 22x20 numeric=0.12534728574564813, @attribute 19x16 numeric=0.12530328612696806, @attribute 18x6 numeric=0.12430001903127641, @attribute 22x6 numeric=0.12416170920871572, @attribute 8x11 numeric=0.12363617027491491, @attribute 14x7 numeric=0.12332967063196643, @attribute 4x19 numeric=0.12329715502020955, @attribute 10x9 numeric=0.12317953132345316, @attribute 9x10 numeric=0.12214578148418598, @attribute 25x11 numeric=0.1203262883382572, @attribute 19x23 numeric=0.12030380922040163, @attribute 12x24 numeric=0.1198709875748416, @attribute 21x22 numeric=0.1197978039326344, @attribute 23x17 numeric=0.11945652459452161, @attribute 24x17 numeric=0.11807898499385772, @attribute 26x16 numeric=0.11791140441723957, @attribute 4x14 numeric=0.11687853395188474, @attribute 9x23 numeric=0.11654569304976459, @attribute 25x16 numeric=0.11522806626771231, @attribute 22x13 numeric=0.11488320780781125, @attribute 8x10 numeric=0.11455681253701577, @attribute 17x6 numeric=0.1143913908190819, @attribute 19x17 numeric=0.11386070755172195, @attribute 16x24 numeric=0.11326741134391316, @attribute 20x15 numeric=0.11143312606554057, @attribute 7x9 numeric=0.11131010963920174, @attribute 7x22 numeric=0.1109465523297688, @attribute 8x23 numeric=0.11011306931082787, @attribute 20x23 numeric=0.10911313664112976, @attribute 24x8 numeric=0.10641121927553243, @attribute 27x13 numeric=0.10472300279556368, @attribute 23x18 numeric=0.10464043182977134, @attribute 5x11 numeric=0.10365187916222496, @attribute 6x21 numeric=0.1023790607501387, @attribute 20x17 numeric=0.10168836021555672, @attribute 27x14 numeric=0.10163741211932376, @attribute 22x21 numeric=0.10066490866887623, @attribute 11x8 numeric=0.1006644363076088, @attribute 16x6 numeric=0.10025722919536095, @attribute 8x24 numeric=0.10001206141859376, @attribute 11x24 numeric=0.09918850915535993, @attribute 8x9 numeric=0.09898281847882062, @attribute 7x23 numeric=0.09891328127826515, @attribute 22x16 numeric=0.09864840996438451, @attribute 9x24 numeric=0.09712018451397508, @attribute 9x9 numeric=0.09696530986438923, @attribute 26x17 numeric=0.0967767594914748, @attribute 27x12 numeric=0.09668653907153946, @attribute 6x9 numeric=0.09598263931713591, @attribute 10x24 numeric=0.09368080069153928, @attribute 25x17 numeric=0.0931398491840345, @attribute 17x24 numeric=0.0927090423676713, @attribute 13x7 numeric=0.09130051611019674, @attribute 4x13 numeric=0.09092436288133143, @attribute 27x15 numeric=0.09032789985774192, @attribute 21x23 numeric=0.09022064639683247, @attribute 24x18 numeric=0.09019401315273523, @attribute 10x8 numeric=0.08988173842218128, @attribute 7x24 numeric=0.08975839175938027, @attribute 25x10 numeric=0.08870288564878903, @attribute 23x19 numeric=0.08848185922162921, @attribute 22x14 numeric=0.08847095302594665, @attribute 26x10 numeric=0.08795873617253669, @attribute 4x20 numeric=0.08774851108178305, @attribute 5x20 numeric=0.08729031199027304, @attribute 23x6 numeric=0.08617958345720078, @attribute 21x15 numeric=0.08471041833461435, @attribute 9x8 numeric=0.08453429136445667, @attribute 8x25 numeric=0.0839423486575277, @attribute 11x14 numeric=0.08317088865878475, @attribute 21x16 numeric=0.08315809695991261, @attribute 8x8 numeric=0.08309939566968128, @attribute 15x6 numeric=0.08211468619177786, @attribute 22x22 numeric=0.08103557459425081, @attribute 22x15 numeric=0.08095211527449031, @attribute 27x11 numeric=0.08055752609793654, @attribute 18x24 numeric=0.07954166718520517, @attribute 6x22 numeric=0.07893151457588798, @attribute 7x8 numeric=0.07767025649746095, @attribute 9x25 numeric=0.07760319365569535, @attribute 26x18 numeric=0.07719507240329726, @attribute 25x18 numeric=0.07685433513412265, @attribute 19x24 numeric=0.07627942762009621, @attribute 20x24 numeric=0.07593412744858119, @attribute 21x5 numeric=0.07503906800139504, @attribute 3x17 numeric=0.07403518320314584, @attribute 5x10 numeric=0.07402678059588474, @attribute 20x5 numeric=0.07298279943502584, @attribute 27x16 numeric=0.07288982565859348, @attribute 23x20 numeric=0.07286438654633631, @attribute 3x16 numeric=0.07267669197890925, @attribute 20x16 numeric=0.07235719173621336, @attribute 24x7 numeric=0.07137086338944698, @attribute 10x7 numeric=0.07119249968593211, @attribute 9x7 numeric=0.07100893254123575, @attribute 3x18 numeric=0.07034432448852446, @attribute 7x25 numeric=0.070257620276867, @attribute 12x7 numeric=0.06944745941892272, @attribute 22x5 numeric=0.06752438303857078, @attribute 4x12 numeric=0.06722170290739271, @attribute 21x24 numeric=0.06647921567631832, @attribute 24x19 numeric=0.06635003056874966, @attribute 6x23 numeric=0.066159782762929, @attribute 11x7 numeric=0.06590101153533512, @attribute 22x23 numeric=0.06472101928436436, @attribute 25x9 numeric=0.06349046903103162, @attribute 8x7 numeric=0.062050939878589784, @attribute 3x15 numeric=0.061633144614938296, @attribute 6x8 numeric=0.06061600217874341, @attribute 27x10 numeric=0.0601928221175112, @attribute 25x19 numeric=0.060045253667570186, @attribute 14x6 numeric=0.059583026123958494, @attribute 3x19 numeric=0.058838670875788424, @attribute 10x25 numeric=0.058668228984227966, @attribute 19x5 numeric=0.05862692905299438, @attribute 23x21 numeric=0.05755067740308384, @attribute 10x6 numeric=0.05750659197363772, @attribute 14x25 numeric=0.05714684857779506, @attribute 6x24 numeric=0.05684324971452126, @attribute 27x17 numeric=0.055998563408767854, @attribute 26x9 numeric=0.055638431925217, @attribute 26x19 numeric=0.05540589722574785, @attribute 15x25 numeric=0.055369776753654065, @attribute 9x6 numeric=0.054831126950010134, @attribute 13x25 numeric=0.05254827838484788, @attribute 4x21 numeric=0.05220740377333799, @attribute 5x21 numeric=0.05216105144248484, @attribute 3x14 numeric=0.05129826420971684, @attribute 7x7 numeric=0.05041512287231731, @attribute 20x25 numeric=0.050220195918642574, @attribute 19x25 numeric=0.05004148666514174, @attribute 16x25 numeric=0.04987948092551786, @attribute 11x6 numeric=0.04975863827209981, @attribute 5x9 numeric=0.04884988349003283, @attribute 22x24 numeric=0.048344396923375665, @attribute 23x22 numeric=0.04752269648805729, @attribute 4x11 numeric=0.04650933280264091, @attribute 24x20 numeric=0.04646264665370703, @attribute 23x5 numeric=0.04603319625113578, @attribute 13x6 numeric=0.045709927268872796, @attribute 8x26 numeric=0.04493805430811593, @attribute 18x25 numeric=0.044636018777287845, @attribute 9x26 numeric=0.044542706617320516, @attribute 12x25 numeric=0.04411288533706248, @attribute 17x25 numeric=0.043991870216993245, @attribute 11x25 numeric=0.04356567903900199, @attribute 18x5 numeric=0.04275782044349885, @attribute 10x5 numeric=0.042604372514631006, @attribute 3x20 numeric=0.042349448314209504, @attribute 21x25 numeric=0.042264161244298215, @attribute 12x6 numeric=0.04174170536087862, @attribute 8x6 numeric=0.04089507933567704, @attribute 6x25 numeric=0.040564598956365217, @attribute 25x20 numeric=0.04018849032918137, @attribute 25x8 numeric=0.03999107543780234, @attribute 27x9 numeric=0.039118809022663736, @attribute 24x6 numeric=0.039021206999058755, @attribute 27x18 numeric=0.038950848495822754, @attribute 23x23 numeric=0.03820427502000667, @attribute 11x5 numeric=0.038012112635926076, @attribute 9x5 numeric=0.03713190346028883, @attribute 3x13 numeric=0.03679462514496912, @attribute 26x20 numeric=0.03487403045675075, @attribute 6x7 numeric=0.03371484486893728, @attribute 7x26 numeric=0.03351726065385119, @attribute 17x5 numeric=0.03264678418229616, @attribute 26x8 numeric=0.03224406292178106, @attribute 24x21 numeric=0.03198248712384766, @attribute 21x4 numeric=0.0315321524762191, @attribute 10x26 numeric=0.03121990829424215, @attribute 4x10 numeric=0.030343288753736264, @attribute 5x22 numeric=0.03008433252946041, @attribute 22x25 numeric=0.029688877778369704, @attribute 22x4 numeric=0.029022743557329367, @attribute 5x8 numeric=0.02814930058917353, @attribute 23x24 numeric=0.027568059041002346, @attribute 12x5 numeric=0.027526465851372084, @attribute 4x22 numeric=0.027107734934611383, @attribute 20x4 numeric=0.02688454902888049, @attribute 7x6 numeric=0.026315950563069013, @attribute 25x21 numeric=0.026057059564731144, @attribute 3x12 numeric=0.02596512056598277, @attribute 3x21 numeric=0.02593481267044284, @attribute 10x4 numeric=0.025202132282421186, @attribute 16x5 numeric=0.024774972362398007, @attribute 27x19 numeric=0.02474305808218613, @attribute 11x4 numeric=0.024377524032297426, @attribute 25x7 numeric=0.024057939451926913, @attribute 19x26 numeric=0.023686531181059678, @attribute 27x8 numeric=0.023161908878236215, @attribute 8x5 numeric=0.022536864409172797, @attribute 24x22 numeric=0.022245817623905317, @attribute 24x5 numeric=0.02178588423428618, @attribute 5x23 numeric=0.021751095437625878, @attribute 20x26 numeric=0.021412229611803113, @attribute 26x21 numeric=0.02133396728211112, @attribute 18x26 numeric=0.021155491680490357, @attribute 15x5 numeric=0.02029440491259349, @attribute 9x4 numeric=0.020093785171100276, @attribute 23x4 numeric=0.019949863302355375, @attribute 19x4 numeric=0.019835085403608677, @attribute 13x5 numeric=0.01951484310185858, @attribute 4x9 numeric=0.01870550247481173, @attribute 14x5 numeric=0.01792808639849497, @attribute 12x4 numeric=0.017779438655931123, @attribute 6x26 numeric=0.017396617096046008, @attribute 6x6 numeric=0.01727504989521167, @attribute 3x11 numeric=0.017247460234901535, @attribute 5x24 numeric=0.01705705332134988, @attribute 21x26 numeric=0.016933752428549997, @attribute 24x23 numeric=0.015795391403597314, @attribute 23x25 numeric=0.015675316903862146, @attribute 17x26 numeric=0.015335256612129644, @attribute 26x7 numeric=0.015264976949423747, @attribute 11x26 numeric=0.015209869740241189, @attribute 25x22 numeric=0.014882751547102835, @attribute 27x20 numeric=0.014825421032789166, @attribute 3x22 numeric=0.014671948359100462, @attribute 28x15 numeric=0.014523695894718358, @attribute 28x14 numeric=0.013970572376551527, @attribute 5x7 numeric=0.013720570647322905, @attribute 28x16 numeric=0.013387885503739039, @attribute 4x23 numeric=0.013180349036681083, @attribute 25x6 numeric=0.012988568481836715, @attribute 26x22 numeric=0.0123243658268124, @attribute 11x3 numeric=0.012076932658666717, @attribute 28x13 numeric=0.011901976757547228, @attribute 10x3 numeric=0.01186142181737404, @attribute 7x5 numeric=0.011665230474507737, @attribute 13x4 numeric=0.011464213274618107, @attribute 28x17 numeric=0.011401635775793117, @attribute 18x4 numeric=0.010929770693166585, @attribute 8x27 numeric=0.010736895075603936, @attribute 24x4 numeric=0.01069603221712967, @attribute 27x7 numeric=0.010560854584438673, @attribute 16x26 numeric=0.010521096886718873, @attribute 5x25 numeric=0.0103054453907232, @attribute 3x10 numeric=0.01025256066598601, @attribute 24x24 numeric=0.010224637919195256, @attribute 22x26 numeric=0.010032328255529688, @attribute 8x4 numeric=0.00968733384573861, @attribute 9x27 numeric=0.009479033972958018, @attribute 4x8 numeric=0.009460101064328708, @attribute 28x12 numeric=0.009337567866613217, @attribute 12x3 numeric=0.008862079747056217, @attribute 27x21 numeric=0.008366783208365813, @attribute 9x3 numeric=0.008322031857127765, @attribute 7x27 numeric=0.00820229201021716, @attribute 28x18 numeric=0.00813903673153682, @attribute 15x26 numeric=0.007839474127973478, @attribute 25x5 numeric=0.0078120725146697545, @attribute 28x11 numeric=0.007768035844610388, @attribute 10x27 numeric=0.007588500038578694, @attribute 25x23 numeric=0.007337023705734413, @attribute 3x23 numeric=0.007188073157985642, @attribute 6x5 numeric=0.007134680066303023, @attribute 26x6 numeric=0.0067245545208227675, @attribute 14x4 numeric=0.006676970701907425, @attribute 21x3 numeric=0.006335139214487029, @attribute 26x23 numeric=0.006136642594994246, @attribute 5x6 numeric=0.006132648485621672, @attribute 22x3 numeric=0.005896111945810301, @attribute 12x26 numeric=0.005847908926168266, @attribute 4x24 numeric=0.005813265570617787, @attribute 3x9 numeric=0.005629335456662332, @attribute 20x3 numeric=0.005512499764705137, @attribute 13x3 numeric=0.005313670386573488, @attribute 17x4 numeric=0.005306442327275729, @attribute 14x26 numeric=0.005186706664255691, @attribute 23x26 numeric=0.004920236349577056, @attribute 15x4 numeric=0.00487032429925538, @attribute 27x22 numeric=0.004646493505386928, @attribute 28x19 numeric=0.004576382896448461, @attribute 28x10 numeric=0.004482224088789621, @attribute 18x27 numeric=0.004446448639089606, @attribute 23x3 numeric=0.004433095011027621, @attribute 24x25 numeric=0.0043191152881454364, @attribute 4x7 numeric=0.004145697516412472, @attribute 17x27 numeric=0.004132375174148439, @attribute 25x4 numeric=0.00410111959383519, @attribute 5x26 numeric=0.004093434263249041, @attribute 11x27 numeric=0.004028629414201568, @attribute 25x24 numeric=0.004006351349112869, @attribute 2x13 numeric=0.00398601620325767, @attribute 19x27 numeric=0.003930269586351454, @attribute 2x14 numeric=0.003921466575071086, @attribute 7x4 numeric=0.003846456144536603, @attribute 19x3 numeric=0.0038011286277366274, @attribute 27x6 numeric=0.003800379448554825, @attribute 20x27 numeric=0.0037346322515592334, @attribute 2x15 numeric=0.003539885747214644, @attribute 16x4 numeric=0.0034269913746673986, @attribute 2x16 numeric=0.0034024447425284876, @attribute 6x27 numeric=0.00335289378864978, @attribute 2x17 numeric=0.0033004268277929683, @attribute 2x12 numeric=0.0031961200663284117, @attribute 28x9 numeric=0.0031958066182538047, @attribute 13x26 numeric=0.003190385285740227, @attribute 2x18 numeric=0.0030310478778718952, @attribute 3x8 numeric=0.0029863534824259297, @attribute 3x24 numeric=0.0029078719908679496, @attribute 8x3 numeric=0.0027229791670806414, @attribute 26x24 numeric=0.002666631221438287, @attribute 16x27 numeric=0.0026465436672706844, @attribute 21x27 numeric=0.002607470206173357, @attribute 2x19 numeric=0.0024770510743232776, @attribute 4x25 numeric=0.0024633288828947997, @attribute 14x3 numeric=0.002435048894617875, @attribute 2x11 numeric=0.0023968515400847323, @attribute 24x3 numeric=0.002361775446284131, @attribute 11x2 numeric=0.0023233416120116424, @attribute 28x20 numeric=0.002313225826485077, @attribute 10x2 numeric=0.0021631587144175235, @attribute 28x8 numeric=0.002118321692078151, @attribute 18x3 numeric=0.0019007132429713636, @attribute 26x5 numeric=0.001899429046551493, @attribute 12x27 numeric=0.0018922251620083763, @attribute 12x2 numeric=0.0017829687148629425, @attribute 15x27 numeric=0.0017550779230499636, @attribute 27x23 numeric=0.0016826336550099796, @attribute 2x20 numeric=0.0016725415362728313, @attribute 2x10 numeric=0.001651386446059444, @attribute 5x5 numeric=0.0015949539058146556, @attribute 4x6 numeric=0.001520018604203699, @attribute 6x4 numeric=0.0014929821247329222, @attribute 22x27 numeric=0.0014136050517361554, @attribute 25x25 numeric=0.0013399178314621452, @attribute 3x7 numeric=0.0013092016208164914, @attribute 9x2 numeric=0.001301016369702701, @attribute 2x21 numeric=0.001226207140055724, @attribute 15x3 numeric=0.0011511094537941524, @attribute 13x2 numeric=0.0011140953194113123, @attribute 17x3 numeric=0.0011102114733470003, @attribute 28x7 numeric=0.0010993607736677902, @attribute 28x21 numeric=0.0010576957822716615, @attribute 14x27 numeric=9.28555372353479E-4, @attribute 2x9 numeric=9.047008277023316E-4, @attribute 27x5 numeric=8.54938430936869E-4, @attribute 24x26 numeric=8.426514229795679E-4, @attribute 8x28 numeric=8.159343439877453E-4, @attribute 3x25 numeric=7.988631188777795E-4, @attribute 8x2 numeric=7.250592565890557E-4, @attribute 2x22 numeric=7.243622387922422E-4, @attribute 7x28 numeric=7.113992938059255E-4, @attribute 4x26 numeric=6.95255950864393E-4, @attribute 16x3 numeric=6.827544089476056E-4, @attribute 25x3 numeric=6.809994408265574E-4, @attribute 14x2 numeric=6.432474879294325E-4, @attribute 2x8 numeric=6.416294781135257E-4, @attribute 26x25 numeric=6.284523667954289E-4, @attribute 5x27 numeric=5.992484217389737E-4, @attribute 3x6 numeric=5.85649962923096E-4, @attribute 9x28 numeric=5.808921413170687E-4, @attribute 10x28 numeric=5.69612763775762E-4, @attribute 28x22 numeric=5.3830429020163E-4, @attribute 3x5 numeric=3.7316400945508477E-4, @attribute 2x7 numeric=3.342440351783438E-4, @attribute 16x28 numeric=3.3327170114239024E-4, @attribute 28x6 numeric=3.260195005188038E-4, @attribute 14x1 numeric=0.0, @attribute 25x2 numeric=0.0, @attribute 25x1 numeric=0.0, @attribute 12x28 numeric=0.0, @attribute 5x28 numeric=0.0, @attribute 12x1 numeric=0.0, @attribute 22x28 numeric=0.0, @attribute 23x2 numeric=0.0, @attribute 23x1 numeric=0.0, @attribute 8x1 numeric=0.0, @attribute 10x1 numeric=0.0, @attribute 26x28 numeric=0.0, @attribute 26x26 numeric=0.0, @attribute 26x27 numeric=0.0, @attribute 21x2 numeric=0.0, @attribute 21x1 numeric=0.0, @attribute 6x1 numeric=0.0, @attribute 6x2 numeric=0.0, @attribute 14x28 numeric=0.0, @attribute 6x3 numeric=0.0, @attribute 24x27 numeric=0.0, @attribute 24x28 numeric=0.0, @attribute 4x1 numeric=0.0, @attribute 4x2 numeric=0.0, @attribute 4x3 numeric=0.0, @attribute 4x4 numeric=0.0, @attribute 4x5 numeric=0.0, @attribute 17x28 numeric=0.0, @attribute 2x1 numeric=0.0, @attribute 2x2 numeric=0.0, @attribute 2x3 numeric=0.0, @attribute 2x4 numeric=0.0, @attribute 2x5 numeric=0.0, @attribute 2x6 numeric=0.0, @attribute 27x28 numeric=0.0, @attribute 27x27 numeric=0.0, @attribute Label {0,1,2,3,4,5,6,7,8,9}=0.0, @attribute 27x26 numeric=0.0, @attribute 27x25 numeric=0.0, @attribute 27x24 numeric=0.0, @attribute 15x28 numeric=0.0, @attribute 19x2 numeric=0.0, @attribute 19x1 numeric=0.0, @attribute 20x28 numeric=0.0, @attribute 17x1 numeric=0.0, @attribute 2x24 numeric=0.0, @attribute 2x25 numeric=0.0, @attribute 2x26 numeric=0.0, @attribute 2x27 numeric=0.0, @attribute 2x28 numeric=0.0, @attribute 19x28 numeric=0.0, @attribute 2x23 numeric=0.0, @attribute 28x1 numeric=0.0, @attribute 17x2 numeric=0.0, @attribute 28x5 numeric=0.0, @attribute 28x4 numeric=0.0, @attribute 28x3 numeric=0.0, @attribute 28x2 numeric=0.0, @attribute 15x2 numeric=0.0, @attribute 15x1 numeric=0.0, @attribute 26x3 numeric=0.0, @attribute 26x2 numeric=0.0, @attribute 26x1 numeric=0.0, @attribute 23x28 numeric=0.0, @attribute 23x27 numeric=0.0, @attribute 4x27 numeric=0.0, @attribute 4x28 numeric=0.0, @attribute 26x4 numeric=0.0, @attribute 13x1 numeric=0.0, @attribute 11x28 numeric=0.0, @attribute 24x2 numeric=0.0, @attribute 24x1 numeric=0.0, @attribute 9x1 numeric=0.0, @attribute 21x28 numeric=0.0, @attribute 11x1 numeric=0.0, @attribute 6x28 numeric=0.0, @attribute 22x2 numeric=0.0, @attribute 22x1 numeric=0.0, @attribute 7x1 numeric=0.0, @attribute 7x2 numeric=0.0, @attribute 7x3 numeric=0.0, @attribute 25x27 numeric=0.0, @attribute 25x28 numeric=0.0, @attribute 25x26 numeric=0.0, @attribute 20x1 numeric=0.0, @attribute 20x2 numeric=0.0, @attribute 13x27 numeric=0.0, @attribute 13x28 numeric=0.0, @attribute 5x1 numeric=0.0, @attribute 5x2 numeric=0.0, @attribute 5x3 numeric=0.0, @attribute 5x4 numeric=0.0, @attribute 3x1 numeric=0.0, @attribute 3x2 numeric=0.0, @attribute 3x3 numeric=0.0, @attribute 3x4 numeric=0.0, @attribute 28x28 numeric=0.0, @attribute 28x23 numeric=0.0, @attribute 28x27 numeric=0.0, @attribute 28x26 numeric=0.0, @attribute 28x25 numeric=0.0, @attribute 28x24 numeric=0.0, @attribute 1x1 numeric=0.0, @attribute 1x2 numeric=0.0, @attribute 1x3 numeric=0.0, @attribute 1x4 numeric=0.0, @attribute 1x5 numeric=0.0, @attribute 1x6 numeric=0.0, @attribute 1x7 numeric=0.0, @attribute 1x8 numeric=0.0, @attribute 1x9 numeric=0.0, @attribute 1x12 numeric=0.0, @attribute 1x13 numeric=0.0, @attribute 1x14 numeric=0.0, @attribute 1x15 numeric=0.0, @attribute 1x16 numeric=0.0, @attribute 1x17 numeric=0.0, @attribute 1x18 numeric=0.0, @attribute 1x19 numeric=0.0, @attribute 1x10 numeric=0.0, @attribute 1x11 numeric=0.0, @attribute 1x23 numeric=0.0, @attribute 1x24 numeric=0.0, @attribute 1x25 numeric=0.0, @attribute 1x26 numeric=0.0, @attribute 1x27 numeric=0.0, @attribute 1x28 numeric=0.0, @attribute 1x20 numeric=0.0, @attribute 1x21 numeric=0.0, @attribute 1x22 numeric=0.0, @attribute 18x2 numeric=0.0, @attribute 18x1 numeric=0.0, @attribute 16x2 numeric=0.0, @attribute 16x1 numeric=0.0, @attribute 27x2 numeric=0.0, @attribute 27x1 numeric=0.0, @attribute 3x26 numeric=0.0, @attribute 3x27 numeric=0.0, @attribute 3x28 numeric=0.0, @attribute 27x4 numeric=0.0, @attribute 27x3 numeric=0.0, @attribute 18x28 numeric=0.0}
+
+@attribute 14x15 numeric
+
+
+Pod¾a výsledkov InfoGainAttributeEval triedy najdôležitejším atribútom je ten na pozícii 14x15 v obrázku. 
+Na chvoste rebríèka sa umiestnili atribúty, ktoré som pri redukovanej vzorke odstránil, èiže tie na okraji obrázka.
+Ich hodnota je 0 alebo ve¾mi blízka nule, èo znamená že nikdy sa na základe daného políèka nerozhoduje o aké èíslo sa jedná.
+
+
+------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
